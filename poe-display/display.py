@@ -1,6 +1,7 @@
 import time
 import socket
 import subprocess
+import os
 from luma.core.interface.serial import i2c
 from luma.oled.device import ssd1306
 from luma.core.render import canvas
@@ -17,8 +18,10 @@ def get_ip():
         )
         with urllib.request.urlopen(req) as r:
             data = json.loads(r.read())
-            iface = data["data"]["interfaces"][0]
-            return iface["ipv4"]["address"][0].split("/")[0]
+            # Instead of [0], look for the interface that actually has an 'up' state or an IP
+            for interface in data["data"]["interfaces"]:
+                if interface["ipv4"]["address"]:
+                    return interface["ipv4"]["address"][0].split("/")[0]
     except:
         return "No IP"
 
