@@ -5,11 +5,9 @@ slug: "poe_display"
 init: false
 arch:
   - aarch64
-  - armv7
-map: []
-ports: {}
 devices:
   - /dev/i2c-1
+build_from:
+  aarch64: ghcr.io/home-assistant/aarch64-base-python:3.11
 options: {}
 schema: {}
-EOF
