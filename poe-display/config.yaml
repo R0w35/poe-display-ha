@@ -1,6 +1,6 @@
 name: "POE Display"
 description: "Drives the SSD1306 OLED on the Waveshare PoE HAT B"
-version: "1.0.0"
+version: "1.0.1"
 slug: "poe_display"
 init: false
 arch:
@@ -8,6 +8,6 @@ arch:
 devices:
   - /dev/i2c-1
 build_from:
-  aarch64: ghcr.io/home-assistant/aarch64-base-python:3.11
+  aarch64: ghcr.io/home-assistant/aarch64-base-python:3.12-alpine3.21
 options: {}
 schema: {}
