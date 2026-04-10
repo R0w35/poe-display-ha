@@ -1,4 +1,4 @@
-FROM ghcr.io/home-assistant/aarch64-base-python:3.11
+FROM ghcr.io/home-assistant/aarch64-base-python:3.12-alpine3.21
 
 RUN pip install luma.oled pillow
 
