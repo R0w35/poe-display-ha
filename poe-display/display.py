@@ -12,7 +12,7 @@ serial = i2c(port=1, address=0x3C)
 device = ssd1306(serial, width=128, height=32)
 
 try:
-    font = ImageFont.truetype("ProggySquare.ttf", 16)
+    font = ImageFont.truetype("ProggyTiny.ttf", 16)
 except:
     print("Proggy font not found, falling back to default")
     font = ImageFont.load_default()
