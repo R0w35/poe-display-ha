@@ -10,9 +10,15 @@ device = ssd1306(serial, width=128, height=32)
 
 def get_ip():
     try:
-        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        s.connect(("8.8.8.8", 80))
-        return s.getsockname()[0]
+        import urllib.request, json
+        req = urllib.request.Request(
+            "http://supervisor/network/info",
+            headers={"Authorization": "Bearer " + os.environ.get("SUPERVISOR_TOKEN", "")}
+        )
+        with urllib.request.urlopen(req) as r:
+            data = json.loads(r.read())
+            iface = data["data"]["interfaces"][0]
+            return iface["ipv4"]["address"][0].split("/")[0]
     except:
         return "No IP"
 
