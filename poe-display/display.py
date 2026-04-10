@@ -12,7 +12,7 @@ serial = i2c(port=1, address=0x3C)
 device = ssd1306(serial, width=128, height=32)
 
 try:
-    font = ImageFont.truetype("FreeSans.ttf", 14)
+    font = ImageFont.truetype("FreeSans.ttf", 16)
 except:
     font = ImageFont.load_default()
 
@@ -46,5 +46,5 @@ def get_temp():
 while True:
     with canvas(device) as draw:
         draw.text((0, 0),  f"IP:   {get_ip()}",   fill="white")
-        draw.text((0, 16), f"Temp: {get_temp()}", fill="white")
+        draw.text((0, 18), f"Temp: {get_temp()}", fill="white")
     time.sleep(5)
