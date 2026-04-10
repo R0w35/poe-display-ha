@@ -6,9 +6,15 @@ import json
 from luma.core.interface.serial import i2c
 from luma.oled.device import ssd1306
 from luma.core.render import canvas
+from PIL import ImageFont
 
 serial = i2c(port=1, address=0x3C)
 device = ssd1306(serial, width=128, height=32)
+
+try:
+    font = ImageFont.truetype("FreeSans.ttf", 14)
+except:
+    font = ImageFont.load_default()
 
 def get_ip():
     try:
