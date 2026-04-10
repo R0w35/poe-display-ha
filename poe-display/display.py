@@ -18,11 +18,11 @@ def get_ip():
         )
         with urllib.request.urlopen(req) as r:
             data = json.loads(r.read())
-            # Instead of [0], look for the interface that actually has an 'up' state or an IP
             for interface in data["data"]["interfaces"]:
                 if interface["ipv4"]["address"]:
                     return interface["ipv4"]["address"][0].split("/")[0]
-    except:
+    except Exception as e:
+        print(f"DEBUG: IP Fetch failed: {e}") # This will show up in your HA Logs
         return "No IP"
 
 def get_temp():
