@@ -1,0 +1,15 @@
+name: "POE Display"
+description: "Drives the SSD1306 OLED on the Waveshare PoE HAT B"
+version: "1.0.0"
+slug: "poe_display"
+init: false
+arch:
+  - aarch64
+  - armv7
+map: []
+ports: {}
+devices:
+  - /dev/i2c-1
+options: {}
+schema: {}
+EOF

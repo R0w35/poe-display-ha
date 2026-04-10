@@ -1,0 +1,34 @@
+import time
+import socket
+import subprocess
+from luma.core.interface.serial import i2c
+from luma.oled.device import ssd1306
+from luma.core.render import canvas
+
+serial = i2c(port=1, address=0x3C)
+device = ssd1306(serial, width=128, height=32)
+
+def get_ip():
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(("8.8.8.8", 80))
+        return s.getsockname()[0]
+    except:
+        return "No IP"
+
+def get_temp():
+    try:
+        result = subprocess.run(
+            ["cat", "/sys/class/thermal/thermal_zone0/temp"],
+            capture_output=True, text=True
+        )
+        temp = int(result.stdout.strip()) / 1000
+        return f"{temp:.1f}C"
+    except:
+        return "N/A"
+
+while True:
+    with canvas(device) as draw:
+        draw.text((0, 0),  f"IP:   {get_ip()}",   fill="white")
+        draw.text((0, 16), f"Temp: {get_temp()}", fill="white")
+    time.sleep(5)
