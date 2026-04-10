@@ -1,7 +1,8 @@
 name: "POE Display"
 description: "Drives the SSD1306 OLED on the Waveshare PoE HAT B"
-version: "1.0.2"
+version: "1.0.3"
 slug: "poe_display"
+hassio_role: manager
 init: false
 arch:
   - aarch64
